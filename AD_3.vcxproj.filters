@@ -21,6 +21,9 @@
     <ClInclude Include="GEOKO.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="DVK.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DVKE.cpp">
@@ -29,5 +32,14 @@
     <ClCompile Include="GEOKO.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="DVK.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

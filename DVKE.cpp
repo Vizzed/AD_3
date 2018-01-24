@@ -2,9 +2,8 @@
 
 
 
-DVKE::DVKE()
+DVKE::DVKE() :v(nullptr), n(nullptr)
 {
-
 }
 
 
