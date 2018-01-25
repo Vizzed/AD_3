@@ -19,13 +19,17 @@ public:
 	DVK(int anz,string choice);
 	DVK();
 	~DVK();
-	GEOKO* listeAusgeben();
 	int getAnz();
 	GEOKO* getMiddle();
 	GEOKO** indexCopy();
-	void quickSort(int links, int rechts,GEOKO* index_neu[]);
+	void quickSort(int links, int rechts, GEOKO* index_neu[]);
 	double distance(GEOKO* geoko);
-	
+	void inDateiSchreiben(string dat,GEOKO* index_neu[]);
 
+	void SelectionSort(GEOKO* index_neu[]);
+
+	void swap(int i, int zeiger, GEOKO * Arr[]);
+	
+	void writeListe(GEOKO * arr[], int anz, const  string name);
 };
 

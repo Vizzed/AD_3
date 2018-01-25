@@ -84,10 +84,6 @@ DVK::~DVK()
 {
 }
 
-GEOKO * DVK::listeAusgeben()
-{
-	return ankerV;
-}
 
 int DVK::getAnz()
 {
@@ -102,14 +98,13 @@ GEOKO* DVK::getMiddle()
 
 GEOKO** DVK::indexCopy()
 {
-	GEOKO** index_neu;
-	index_neu = new GEOKO*[anz];
+	GEOKO** index_neu = new GEOKO*[anz];
+
 	for (int i = 0; i < anz; i++) {
 		index_neu[i] = index[i];
 	}
 	//index_neu[0].setBrGr(1);
 	//cout << index_neu[0].getBrGr()<<endl;
-	
 	return index_neu;
 }
 
@@ -133,18 +128,12 @@ void DVK::quickSort(int links,int rechts,GEOKO* index_neu[])
 		}
 	}
 	if (links < pivot - 1) {
-		quickSort(links, pivot - 1, index_neu);
+		quickSort(links, pivot - 1,index_neu);
 	}
 	if (rechts > pivot + 1) {
-		quickSort(pivot + 1, rechts, index_neu);
+		quickSort(pivot + 1, rechts,index_neu);
 	}
 	
-	ofstream datei("Daten_S.csv");
-	for (int i = 0; i < anz; i++) {
-		// Rausschreiben mit 2 Nachkommastellen
-		datei << std::fixed << setprecision(2)<< index_neu[i]->getBr() << ": " << index_neu[i]->getLa() << ";"<<" Abstand zum Mittelpunkt: " <<distance(index_neu[i])<< endl;
-	}
-	datei.close();
 }
 
 double DVK::distance(GEOKO* geoko)
@@ -153,3 +142,47 @@ double DVK::distance(GEOKO* geoko)
 	return distance;
 }
 
+void DVK::inDateiSchreiben(string dat,GEOKO* index_neu[])
+{
+	
+	ofstream datei(dat);
+	for (int i = 0; i < anz; i++) {
+		// Rausschreiben mit 2 Nachkommastellen
+		datei << std::fixed << setprecision(2) << index_neu[i]->getBr() << ": " << index_neu[i]->getLa() << ";" << " Abstand zum Mittelpunkt: " << distance(index_neu[i]) << endl;
+	}
+	datei.close();
+}
+
+void DVK::SelectionSort(GEOKO* index_neu[]) {
+	
+	int zeiger = 0;
+
+	for (int i = 0; i < anz; i++) {
+		zeiger = 0;
+		for (int k = 0; k < anz - i; k++) {
+			if (*index_neu[k] >> *middle > *index_neu[zeiger] >> *middle) {
+				zeiger = k;
+			}
+		}
+		swap(zeiger, anz - i, index_neu);
+	}
+	
+}
+
+void DVK::swap(int i, int zeiger, GEOKO *Arr[]) {
+	GEOKO* tmp = Arr[i];
+	Arr[i] = Arr[zeiger];
+	Arr[zeiger] = tmp;
+}
+
+void DVK::writeListe(GEOKO * arr[], int anz, const  string name) {
+	double br, la;
+	ofstream datei(name);
+	for (int i = 0; i < anz; i++) {
+		br= (((arr[i]->getBrSec() / 60) + arr[i]->getBrMin()) / 60) + arr[i]->getBrGr();
+		la= (((arr[i]->getLaSec() / 60) + arr[i]->getLaMin()) / 60) + arr[i]->getLaGr();
+		// Rausschreiben mit 2 Nachkommastellen
+		datei << std::fixed << setprecision(2) << "   " << br << ",   " << la << ";" << endl;
+	}
+	datei.close();
+}
