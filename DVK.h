@@ -23,8 +23,11 @@ public:
 	GEOKO* getMiddle();
 	GEOKO** indexCopy();
 	void quickSort(int links, int rechts, GEOKO* index_neu[]);
+
 	double distance(GEOKO* geoko);
 	void inDateiSchreiben(string dat,GEOKO* index_neu[]);
+
+	GEOKO* getMiddle()const;
 
 	void SelectionSort(GEOKO* index_neu[]);
 

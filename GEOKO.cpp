@@ -2,8 +2,7 @@
 
 
 
-GEOKO::GEOKO() :brGr(0), brMin(0), brSec(0), laGr(0), laMin(0), laSec(0), br(0), la(0)
-{
+GEOKO::GEOKO() :brGr(0), brMin(0), brSec(0), laGr(0), laMin(0), laSec(0), br(0), la(0) {
 }
 GEOKO::GEOKO(int brGr, int laGr, int brMin, int laMin, double brSec, double laSec,double br,double la) {
 	this->brGr = brGr;

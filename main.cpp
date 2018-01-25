@@ -63,20 +63,23 @@ int main() {
 	int anz;
 	int datei=0;
 	DVK* dvk=nullptr;
-	GEOKO* geoko=nullptr;
-	DVKE* dvke=nullptr;
+	//GEOKO* geoko=nullptr;
+	//DVKE* dvke=nullptr;
 	string file;
 	
 	do{
 		cout << "Menue:" << endl;
 		cout << "'1' Verkettete Liste erzeugen." << endl;
 		cout << "'2' Quicksort." << endl;
-		cout << "'3' anderes Sortieralgortihmus." << endl;
+		cout << "'3' Selection Sort." << endl;
 		cout << "'4' Programm beenden." << endl;
 		cin >> choice;
 		switch (choice)
 		{
 		case 1:
+			if (datei !=0) {
+				datei = 0;
+			}
 			cout << "Geben Sie ein wieviele Objekte erstellt werden sollen (weniger als 1000000)" << endl;
 			cin >> anz;
 			if (anz > 1000000) {
@@ -112,6 +115,7 @@ int main() {
 			double nulltime;
 			beginMessung(&g_LastCount, &g_FirstCount, &g_Frequency, &nulltime);
 			dvk->quickSort(0, dvk->getAnz() - 1,copy);
+			//dvk->quicksort(0, dvk->getAnz() - 1, copy);
 			endeMessung(g_LastCount, g_FirstCount, g_Frequency, nulltime);
 			switch (datei)
 			{

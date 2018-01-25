@@ -61,8 +61,8 @@ DVK::DVK(int anz,string choice){
 	}
 
 	//Teilen der Gesamtbreite-laenge durch Anzahl
-	br_ges /= anz;
-	la_ges /= anz;
+	br_ges /= this->anz;
+	la_ges /= this->anz;
 	brGr = (int)(br_ges / 3600);
 	laGr = (int)(la_ges / 3600);
 	xb = (br_ges / 3600 - brGr) * 60;
@@ -72,7 +72,7 @@ DVK::DVK(int anz,string choice){
 
 	brSec = (double)((xb - brMin) * 60);
 	laSec = (double)((xl - laMin) * 60);
-	middle = new GEOKO(brGr, laGr, brMin, laMin, brSec, laSec, br, la);
+	this->middle = new GEOKO(brGr, laGr, brMin, laMin, brSec, laSec, br, la);
 	file.close();
 
 
@@ -114,8 +114,8 @@ void DVK::quickSort(int links,int rechts,GEOKO* index_neu[])
 	int tausch;
 	
 	for (int i = links + 1; i <= rechts; i++) {
-
-		if ((distance(index_neu[pivot]))>(distance(index_neu[i])))	//tausche pivot mit Element wenn Element kleiner
+	
+		if (*index_neu[pivot] >> *middle > *index_neu[i] >> *middle)	//tausche pivot mit Element wenn Element kleiner
 		{
 			tausch = i;
 			while (pivot < tausch) {							//tauschen
@@ -136,9 +136,10 @@ void DVK::quickSort(int links,int rechts,GEOKO* index_neu[])
 	
 }
 
+
 double DVK::distance(GEOKO* geoko)
 {
-	double distance = sqrt(pow(geoko->getBr() -middle->getBr(), 2) + pow(geoko->getLa()-middle->getLa(), 2));
+	double distance = sqrt(pow(geoko->getBr() -this->middle->getBr(), 2) + pow(geoko->getLa()-this->middle->getLa(), 2));
 	return distance;
 }
 
@@ -148,9 +149,14 @@ void DVK::inDateiSchreiben(string dat,GEOKO* index_neu[])
 	ofstream datei(dat);
 	for (int i = 0; i < anz; i++) {
 		// Rausschreiben mit 2 Nachkommastellen
-		datei << std::fixed << setprecision(2) << index_neu[i]->getBr() << ": " << index_neu[i]->getLa() << ";" << " Abstand zum Mittelpunkt: " << distance(index_neu[i]) << endl;
+		datei << std::fixed << setprecision(2) << index_neu[i]->getBr() << ": " << index_neu[i]->getLa() << ";" << " Abstand zum Mittelpunkt: " << (*middle>>*index_neu[i])<< endl;
 	}
 	datei.close();
+}
+
+GEOKO * DVK::getMiddle() const
+{
+	return this->middle;
 }
 
 void DVK::SelectionSort(GEOKO* index_neu[]) {
@@ -164,8 +170,8 @@ void DVK::SelectionSort(GEOKO* index_neu[]) {
 		start = index_neu[i];
 
 		for (int k = zeiger+1; k < anz ; k++) {
-			//if (*index_neu[k] >> *middle > *index_neu[zeiger] >> *middle) {
-			if (distance(index_neu[k]) < distance(index_neu[zeiger])){
+			if (*index_neu[k]>>*middle > *index_neu[zeiger]>>*middle) {
+			//if (distance(index_neu[k]) < distance(index_neu[zeiger])){
 				zeiger = k;
 			}
 		}
