@@ -156,21 +156,28 @@ void DVK::inDateiSchreiben(string dat,GEOKO* index_neu[])
 void DVK::SelectionSort(GEOKO* index_neu[]) {
 	
 	int zeiger = 0;
+	int anz = this->anz;
+	GEOKO* start = NULL;
 
-	for (int i = 0; i < anz; i++) {
-		zeiger = 0;
-		for (int k = 0; k < anz - i; k++) {
-			if (*index_neu[k] >> *middle > *index_neu[zeiger] >> *middle) {
+	for (int i = 0; i < this->anz; i++) {
+		zeiger = i;
+		start = index_neu[i];
+
+		for (int k = zeiger+1; k < anz ; k++) {
+			//if (*index_neu[k] >> *middle > *index_neu[zeiger] >> *middle) {
+			if (distance(index_neu[k]) < distance(index_neu[zeiger])){
 				zeiger = k;
 			}
 		}
-		swap(zeiger, anz - i, index_neu);
+		index_neu[i] = index_neu[zeiger];
+		index_neu[zeiger] = start;
+		//swap(zeiger, (anz - i), index_neu);
 	}
 	
 }
 
 void DVK::swap(int i, int zeiger, GEOKO *Arr[]) {
-	GEOKO* tmp = Arr[i];
+	GEOKO *tmp = Arr[i];
 	Arr[i] = Arr[zeiger];
 	Arr[zeiger] = tmp;
 }

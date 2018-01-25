@@ -125,8 +125,7 @@ int main() {
 			}}
 			break;
 
-		case 3:
-		{
+		case 3:{
 			GEOKO** copy = dvk->indexCopy();
 			LONGLONG g_Frequency = 0, g_FirstCount = 0, g_LastCount = 0;
 			double nulltime;
@@ -135,14 +134,15 @@ int main() {
 			endeMessung(g_LastCount, g_FirstCount, g_Frequency, nulltime);
 			switch (datei)
 			{
-			case 1: dvk->inDateiSchreiben("Daten_S.csv", copy);
-				break;
-			case 2:
-				dvk->inDateiSchreiben("Daten1_S.csv", copy);
-				break;
-			default:
-				break;
-			}}
+				case 1: dvk->inDateiSchreiben("Daten_S.csv", copy);
+					break;
+				case 2:
+					dvk->inDateiSchreiben("Daten1_S.csv", copy);
+					break;
+				default:
+					break;
+			}
+		}
 		break;
 		case 4:
 			break;
